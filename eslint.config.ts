@@ -12,4 +12,8 @@ export default antfu({
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     '@typescript-eslint/no-explicit-any': 0,
   },
-}).append(prettier)
+})
+  .append(prettier)
+  .append({
+    ignores: ['README.md'],
+  })
