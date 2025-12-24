@@ -1,0 +1,34 @@
+# EditorConfig is awesome: https://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+indent_style = space
+indent_size = 2
+
+# JS / TS / Vue：缩进只作为兜底
+[*.{js,jsx,ts,tsx,vue}]
+indent_style = space
+indent_size = 2
+
+# JSON / 配置文件
+[*.{json,jsonc}]
+indent_style = space
+indent_size = 2
+
+# Markdown：不自动裁剪行尾空格（否则表格/换行会被破坏）
+[*.md]
+trim_trailing_whitespace = false
+
+# Shell / 配置类脚本
+[*.{sh,zsh}]
+indent_style = space
+indent_size = 2
+
+# Makefile 必须用 tab（历史原因）
+[Makefile]
+indent_style = tab
