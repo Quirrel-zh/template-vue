@@ -363,9 +363,14 @@ pipeline {
 ├── .husky/                 # Git 钩子配置
 │   ├── pre-commit         # 提交前检查
 │   └── commit-msg         # 提交信息校验
+├── docs/                   # 项目文档
+│   └── STYLE_GUIDE.md     # 样式使用指南（Tailwind + Ant Design）
 ├── public/                # 静态资源
 ├── src/
 │   ├── assets/           # 资源文件
+│   │   └── styles/      # 样式文件
+│   │       ├── antd-overrides.less  # Ant Design 全局样式覆盖
+│   │       └── tailwind.css         # Tailwind CSS 入口
 │   ├── components/       # 组件
 │   ├── router/           # 路由配置
 │   ├── stores/           # Pinia 状态管理
@@ -423,6 +428,73 @@ pipeline {
 ## 🔗 TypeScript 支持
 
 TypeScript 默认无法处理 `.vue` 文件的类型信息，因此我们使用 `vue-tsc` 进行类型检查。在编辑器中需要 [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) 插件来让 TypeScript 语言服务识别 `.vue` 类型。
+
+## 🎨 样式使用指南
+
+### Tailwind CSS 与 Ant Design 配合使用
+
+本项目同时使用 **Tailwind CSS** 和 **Ant Design Vue**，遵循以下核心原则：
+
+- **Tailwind CSS**：负责页面布局、间距和通用样式
+- **Less**：负责 Ant Design 组件样式定制和深度样式覆盖
+
+### 核心原则
+
+#### 何时使用 Tailwind CSS
+
+- ✅ 页面布局（flex、grid、spacing）
+- ✅ 响应式设计（md:、lg: 等断点）
+- ✅ 通用样式（颜色、字体、边框）
+- ✅ 快速原型和间距控制
+- ✅ 工具类样式（hover、focus 等状态）
+
+#### 何时使用 Less
+
+- ✅ Ant Design 组件样式覆盖
+- ✅ 复杂的组件样式定制
+- ✅ 主题变量修改
+- ✅ 深度选择器（:deep()）样式
+- ✅ 组件级别的样式封装
+
+### ⚠️ 重要：样式优先级问题
+
+当在 Ant Design 组件上直接使用 Tailwind 间距类时，由于 CSS 优先级问题，可能需要特殊处理：
+
+**方案 1：使用 `!` 修饰符（推荐用于简单场景）**
+
+```vue
+<a-card class="mb-6!" title="标题">内容</a-card>
+```
+
+**方案 2：外层包裹 div（推荐用于复杂布局）**
+
+```vue
+<div class="mb-6">
+  <a-card title="标题">内容</a-card>
+</div>
+```
+
+### 📋 样式位置选择：四个判断问题
+
+当需要自定义 Ant Design 组件样式时，使用以下四个问题来判断应该写在哪个位置：
+
+1. **是不是只影响当前页面？**
+2. **是否依赖页面结构或上下文？**
+3. **将来复用价值是否很低？**
+4. **用 Tailwind / token 是否做不到？**
+
+**全部是"是"** → 写在 **Vue 文件的 scoped less**（使用 `:deep()`）  
+**否则** → 写在 **全局 `antd-overrides.less`** 或使用 **ConfigProvider**
+
+### 📚 详细文档
+
+**完整样式指南：** 请查看 [`docs/STYLE_GUIDE.md`](docs/STYLE_GUIDE.md) 获取：
+
+- 样式优先级问题的详细分析
+- 三种解决方案的对比和选择指南
+- 样式位置选择的判断标准（四个问题）
+- 实际项目示例和最佳实践
+- Scoped Less vs 全局 Less 的对比表格
 
 ## 📚 更多配置
 

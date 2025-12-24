@@ -4,7 +4,6 @@ import prettier from 'eslint-config-prettier'
 export default antfu({
   vue: true,
 
-  // 关键：关闭 ESLint 格式化
   stylistic: false,
   formatters: false,
 

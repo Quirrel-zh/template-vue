@@ -1,0 +1,47 @@
+/**
+ * Ant Design 全局样式覆盖文件
+ *
+ * 使用场景判断标准（四个问题）：
+ * 1️⃣ 是不是只影响当前页面？
+ * 2️⃣ 是否依赖页面结构或上下文？
+ * 3️⃣ 将来复用价值是否很低？
+ * 4️⃣ 用 Tailwind / token 是否做不到？
+ *
+ * 全部是"是" → 写在 Vue scoped less（使用 :deep）
+ * 否则 → 写在这里（全局 antd-overrides.less）或使用 ConfigProvider
+ *
+ * 详细说明请查看：docs/STYLE_GUIDE.md
+ */
+
+// 覆盖 AntD 主题变量
+@primary-color: #0e8c11;
+@font-size-base: 0.8rem;
+
+// 全局 Card 样式（所有页面通用，可复用）
+// ✅ 应该写在这里：影响所有页面，复用价值高
+.ant-card {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  &.no_title_border {
+    .ant-card-head {
+      border-bottom: none;
+    }
+  }
+  &.no_border {
+    border: none;
+  }
+
+  .ant-card-head {
+    padding: 0 0 1rem 0;
+  }
+
+  .ant-card-body {
+    padding: 0;
+  }
+
+  &.no_title {
+    .ant-card-body {
+      padding: 1.5rem;
+    }
+  }
+}

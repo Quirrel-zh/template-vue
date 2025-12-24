@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+@theme {
+  /* color */
+  --color-primary: #0e8c11;
+  --color-primary-dark: #1c751e;
+  --color-primary-light: #9cff9e;
+  --color-default: #0a1428;
+  --color-default-dark: #222f35;
+  --color-remark: #6a6d78;
+
+  /* margin/padding */
+  --margin-default: 16.25rem;
+  --padding-default: 16.25rem;
+
+  /* font-size */
+  --text-title-lg: 3.5rem;
+  --text-title-md: 2.87rem;
+
+  /* hover */
+}
