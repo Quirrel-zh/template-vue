@@ -1,3 +1,12 @@
+/**
+ * rem 等比缩放基准说明
+ * 设计稿基准：2560 × 1440
+ * 根字号：1rem = 16px（仅在 2560px 宽度下成立）
+ * 随视口宽度等比缩放，由 src/composables/useRem.ts 动态设置 html font-size
+ *
+ * 书写换算（2560px 设计稿）：
+ *   16px → 1rem | 24px → 1.5rem | 32px → 2rem | 12px → 0.75rem | 8px → 0.5rem
+ */
 @import 'tailwindcss';
 
 @theme {

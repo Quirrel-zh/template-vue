@@ -1,31 +1,19 @@
 <script setup lang="ts">
   import zhCN from 'ant-design-vue/es/locale/zh_CN'
   import { storeToRefs } from 'pinia'
-  import { onBeforeUnmount, onMounted, ref } from 'vue'
+  // [可选] 等比缩放方案：取消下方注释并注释掉固定 antFontSize 即可启用
+  // import { useRem } from './composables/useRem'
   import { useCommonStore } from './stores/common'
-  import debounce from './utils/debounce'
 
   const commonStore = useCommonStore()
   const { loading } = storeToRefs(commonStore)
 
-  const antFontSize = ref(14)
+  // 固定字号（主流方案：不做等比缩放，使用固定 px/rem 值）
+  const antFontSize = 16
 
-  function resize() {
-    const width = window.innerWidth
-
-    if (width >= 1920) antFontSize.value = 16
-    else if (width >= 1440) antFontSize.value = 15
-    else antFontSize.value = 14
-  }
-  const onResize = debounce(resize, 100)
-
-  onMounted(() => {
-    resize()
-    window.addEventListener('resize', onResize)
-  })
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', onResize)
-  })
+  // [可选] 等比缩放方案（基准：2560px / 16px）
+  // 注释掉上方 antFontSize，并取消下方注释即可切换
+  // const { antFontSize } = useRem()
 </script>
 
 <template>
