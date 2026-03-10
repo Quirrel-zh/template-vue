@@ -7,6 +7,12 @@
  * 书写换算（2560px 设计稿）：
  *   16px → 1rem | 24px → 1.5rem | 32px → 2rem | 12px → 0.75rem | 8px → 0.5rem
  */
+
+@layer reset;
+
+@layer reset {
+  @import 'ant-design-vue/dist/reset.css';
+}
 @import 'tailwindcss';
 
 @theme {

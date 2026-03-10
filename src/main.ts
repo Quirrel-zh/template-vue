@@ -6,7 +6,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/styles/tailwind.css'
-import 'ant-design-vue/dist/reset.css'
 import './assets/styles/antd-overrides.less'
 
 const app = createApp(App)
