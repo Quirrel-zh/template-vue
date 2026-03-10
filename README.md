@@ -4,15 +4,15 @@
 
 ## 📋 环境要求
 
-- **Node.js**: `^20.19.0` 或 `>=22.12.0`
-- **包管理器**: npm / pnpm / yarn
+- **Node.js**: `^24.13.0`
+- **包管理器**: pnpm (强制)
 
 ## 🚀 快速开始
 
 ### 安装依赖
 
 ```bash
-npm install
+pnpm install
 ```
 
 > ⚠️ **重要**: 首次安装后会自动执行 `husky install`，初始化 Git 钩子。
@@ -20,7 +20,7 @@ npm install
 ### 开发环境
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 启动后访问 `http://localhost:5173`（默认端口）
@@ -28,7 +28,7 @@ npm run dev
 ### 生产构建
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 构建产物输出到 `dist` 目录。
@@ -36,26 +36,26 @@ npm run build
 ### 预览生产构建
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 ### 类型检查
 
 ```bash
-npm run type-check
+pnpm run type-check
 ```
 
 ### 代码检查与格式化
 
 ```bash
 # 检查代码规范
-npm run lint
+pnpm run lint
 
 # 自动修复代码问题
-npm run lint:fix
+pnpm run lint:fix
 
 # 格式化所有文件
-npm run format
+pnpm run format
 ```
 
 ## 🐶 Husky Git 钩子说明
@@ -133,7 +133,7 @@ git commit -m "WIP"
 **解决方案**:
 
 ```bash
-npm install
+pnpm install
 ```
 
 #### 问题 2: 钩子执行失败导致无法提交
@@ -165,7 +165,7 @@ chmod +x .husky/*
 
 ```bash
 # 1. 卸载依赖
-npm uninstall husky lint-staged @commitlint/cli @commitlint/config-conventional
+pnpm remove husky lint-staged @commitlint/cli @commitlint/config-conventional
 
 # 2. 删除配置文件
 rm -rf .husky
@@ -173,187 +173,6 @@ rm commitlint.config.cjs
 
 # 3. 从 package.json 中移除相关配置
 # 删除 "prepare" script 和 "lint-staged" 配置
-```
-
-## 🔧 CI/CD 配置（可选）
-
-### GitHub Actions 配置
-
-创建 `.github/workflows/ci.yml`:
-
-```yaml
-name: CI
-
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
-
-jobs:
-  lint-and-test:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x, 22.x]
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: 使用 Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
-
-      - name: 安装依赖
-        run: npm ci
-
-      - name: 代码检查
-        run: npm run lint
-
-      - name: 类型检查
-        run: npm run type-check
-
-      - name: 构建
-        run: npm run build
-
-  build:
-    runs-on: ubuntu-latest
-    needs: lint-and-test
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: 使用 Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: npm
-
-      - name: 安装依赖
-        run: npm ci
-
-      - name: 构建
-        run: npm run build
-
-      - name: 上传构建产物
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist/
-```
-
-### GitLab CI 配置
-
-创建 `.gitlab-ci.yml`:
-
-```yaml
-image: node:22-alpine
-
-stages:
-  - install
-  - lint
-  - build
-  - deploy
-
-cache:
-  paths:
-    - node_modules/
-
-install:
-  stage: install
-  script:
-    - npm ci
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 hour
-
-lint:
-  stage: lint
-  script:
-    - npm run lint
-    - npm run type-check
-  needs:
-    - install
-
-build:
-  stage: build
-  script:
-    - npm run build
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 1 week
-  needs:
-    - lint
-
-deploy:
-  stage: deploy
-  script:
-    - echo "部署到生产环境"
-    # 添加你的部署脚本
-  only:
-    - main
-  needs:
-    - build
-```
-
-### Jenkins Pipeline 配置
-
-创建 `Jenkinsfile`:
-
-```groovy
-pipeline {
-    agent any
-
-    tools {
-        nodejs 'NodeJS 22'
-    }
-
-    stages {
-        stage('安装依赖') {
-            steps {
-                sh 'npm ci'
-            }
-        }
-
-        stage('代码检查') {
-            steps {
-                sh 'npm run lint'
-            }
-        }
-
-        stage('类型检查') {
-            steps {
-                sh 'npm run type-check'
-            }
-        }
-
-        stage('构建') {
-            steps {
-                sh 'npm run build'
-            }
-        }
-
-        stage('归档') {
-            steps {
-                archiveArtifacts artifacts: 'dist/**/*', fingerprint: true
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '构建成功！'
-        }
-        failure {
-            echo '构建失败！'
-        }
-    }
-}
 ```
 
 ## 📁 项目结构
