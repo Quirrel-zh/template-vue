@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
   import { useRouter } from 'vue-router'
 
   import { usePage } from './mainView'
@@ -35,14 +35,14 @@
 
           <!-- 按钮区域 - 使用 Tailwind 控制布局 -->
           <div class="flex justify-center gap-4">
-            <a-button
-              class="custom-jump-btn"
+            <n-button
+              class="min-w-[200px] h-12 rounded-lg font-medium bg-linear-to-r from-violet-500 to-indigo-600 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5"
               type="primary"
               size="large"
               @click="handleGoToTestView"
             >
               跳转到 TestView
-            </a-button>
+            </n-button>
           </div>
 
           <!-- 说明信息 - 使用 Tailwind -->
@@ -57,27 +57,3 @@
     </div>
   </div>
 </template>
-
-<style lang="less" scoped>
-  // 使用 Less 自定义按钮样式
-  .custom-jump-btn {
-    min-width: 200px;
-    height: 48px;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
-</style>

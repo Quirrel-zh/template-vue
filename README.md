@@ -1,13 +1,13 @@
-# Vue 3 + TypeScript + Tailwind CSS + Ant Design 项目模板
+# Vue 3 + TypeScript + Tailwind CSS + Naive UI 项目模板
 
 这是一个开箱即用的 Vue 3 项目模板，集成了现代化的开发工具链和最佳实践配置。
 
-## 📋 环境要求
+## 环境要求
 
-- **Node.js**: `^24.13.0`
+- **Node.js**: `^24`
 - **包管理器**: pnpm (强制)
 
-## 🚀 快速开始
+## 快速开始
 
 ### 安装依赖
 
@@ -15,12 +15,12 @@
 pnpm install
 ```
 
-> ⚠️ **重要**: 首次安装后会自动执行 `husky install`，初始化 Git 钩子。
+> **重要**: 首次安装后会自动执行 `husky install`，初始化 Git 钩子。
 
 ### 开发环境
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 启动后访问 `http://localhost:5173`（默认端口）
@@ -28,37 +28,37 @@ pnpm run dev
 ### 生产构建
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 构建产物输出到 `dist` 目录。
 
-### 预览生产构建
+### 测试环境构建
 
 ```bash
-pnpm run preview
+pnpm build --mode test
 ```
 
 ### 类型检查
 
 ```bash
-pnpm run type-check
+pnpm type-check
 ```
 
 ### 代码检查与格式化
 
 ```bash
 # 检查代码规范
-pnpm run lint
+pnpm lint
 
 # 自动修复代码问题
-pnpm run lint:fix
+pnpm lint:fix
 
 # 格式化所有文件
-pnpm run format
+pnpm format
 ```
 
-## 🐶 Husky Git 钩子说明
+## Husky Git 钩子说明
 
 本项目使用 Husky 来管理 Git 钩子，确保代码质量。
 
@@ -124,7 +124,7 @@ git commit -m "修复bug"
 git commit -m "WIP"
 ```
 
-### ⚠️ Husky 常见问题
+### Husky 常见问题
 
 #### 问题 1: 克隆项目后钩子未生效
 
@@ -175,38 +175,68 @@ rm commitlint.config.cjs
 # 删除 "prepare" script 和 "lint-staged" 配置
 ```
 
-## 📁 项目结构
+## 项目结构
 
 ```
 .
-├── .husky/                 # Git 钩子配置
-│   ├── pre-commit         # 提交前检查
-│   └── commit-msg         # 提交信息校验
-├── docs/                   # 项目文档
-│   └── STYLE_GUIDE.md     # 样式使用指南（Tailwind + Ant Design）
-├── public/                # 静态资源
+├── .husky/                    # Git 钩子配置
+│   ├── pre-commit             # 提交前检查
+│   └── commit-msg             # 提交信息校验
+├── docs/                      # 项目文档
+│   └── STYLE_GUIDE.md         # 样式使用指南（Tailwind + Naive UI）
+├── public/                    # 静态资源
+│   └── favicon.ico
 ├── src/
-│   ├── assets/           # 资源文件
-│   │   └── styles/      # 样式文件
-│   │       ├── antd-overrides.less  # Ant Design 全局样式覆盖
-│   │       └── tailwind.css         # Tailwind CSS 入口
-│   ├── components/       # 组件
-│   ├── router/           # 路由配置
-│   ├── stores/           # Pinia 状态管理
-│   ├── views/            # 页面
-│   ├── App.vue           # 根组件
-│   └── main.ts           # 入口文件
+│   ├── api/                   # 接口请求
+│   │   ├── core/              # request封装
+│   │   └── service/           # 业务接口
+│   ├── assets/                # 资源文件
+│   │   ├── fonts/             # 字体图标文件
+│   │   ├── styles/            # 样式文件
+│   │   │   └── tailwind.css   # Tailwind CSS 入口
+│   │   └── types/             # 类型声明
+│   ├── components/            # 公共组件
+│   │   ├── common/            # 通用业务组件
+│   │   └── ui/                # 基础 UI 组件
+│   ├── composables/           # 组合式函数
+│   │   ├── useLocaleEffect.ts # 语言切换副作用
+│   │   └── useRem.ts          # rem 自适应缩放
+│   ├── config/                # 环境与全局配置
+│   ├── constants/             # 常量定义
+│   │   └── app.ts
+│   ├── locales/               # 国际化资源
+│   │   ├── zh-CN.ts
+│   │   └── en-US.ts
+│   ├── router/                # 路由配置
+│   │   └── index.ts
+│   ├── stores/                # Pinia 状态管理
+│   │   ├── common.ts
+│   │   ├── locale.ts
+│   │   └── counter.ts
+│   ├── utils/                 # 工具函数
+│   ├── views/                 # 页面
+│   ├── i18n.ts                # i18n 初始化
+│   ├── App.vue                # 根组件
+│   └── main.ts                # 入口文件
+├── .editorconfig              # 编辑器统一配置
 ├── .gitignore
-├── commitlint.config.cjs  # Commitlint 配置
-├── eslint.config.ts       # ESLint 配置
+├── .npmrc                     # npm 配置
+├── .nvmrc                     # Node.js 版本锁定
+├── .pnpmrc                    # pnpm 配置
+├── .prettierrc                # Prettier 配置
+├── commitlint.config.cjs      # Commitlint 配置
+├── env.d.ts                   # 环境变量类型声明
+├── eslint.config.ts           # ESLint 配置
 ├── index.html
 ├── package.json
-├── tsconfig.json          # TypeScript 配置
-├── vite.config.ts         # Vite 配置
+├── tsconfig.json              # TypeScript 配置（根）
+├── tsconfig.app.json          # TypeScript 配置（应用）
+├── tsconfig.node.json         # TypeScript 配置（Node）
+├── vite.config.ts             # Vite 配置
 └── README.md
 ```
 
-## 🎨 推荐的 IDE 配置
+## 推荐的 IDE 配置
 
 ### VS Code
 
@@ -216,6 +246,7 @@ rm commitlint.config.cjs
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - 代码检查
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - 代码格式化
 - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) - Tailwind 智能提示
+- [File Nesting Updater](https://open-vsx.org/extension/antfu/file-nesting) - 自动配置文件嵌套折叠
 
 ### VS Code 配置文件
 
@@ -232,96 +263,54 @@ rm commitlint.config.cjs
 }
 ```
 
-## 🌐 浏览器开发工具
+## 浏览器开发工具
 
 ### Chromium 系列（Chrome、Edge、Brave 等）
 
 - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
 - [启用自定义对象格式化](http://bit.ly/object-formatters)
 
-### Firefox
-
-- [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-- [启用自定义对象格式化](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## 🔗 TypeScript 支持
+## TypeScript 支持
 
 TypeScript 默认无法处理 `.vue` 文件的类型信息，因此我们使用 `vue-tsc` 进行类型检查。在编辑器中需要 [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) 插件来让 TypeScript 语言服务识别 `.vue` 类型。
 
-## 🎨 样式使用指南
+## 样式使用指南
 
-### Tailwind CSS 与 Ant Design 配合使用
+### Tailwind CSS 与 Naive UI 配合使用
 
-本项目同时使用 **Tailwind CSS** 和 **Ant Design Vue**，遵循以下核心原则：
+本项目采用以下统一策略：
 
-- **Tailwind CSS**：负责页面布局、间距和通用样式
-- **Less**：负责 Ant Design 组件样式定制和深度样式覆盖
+- **Naive UI**：提供组件能力（交互、可访问性、状态）
+- **Tailwind CSS**：负责页面视觉与布局（间距、排版、响应式、边框与背景）
+- **NConfigProvider**：统一全局主题（字体、字号、颜色 token）
 
-### 核心原则
+默认情况下，**不再使用 Less 覆盖 Naive UI 内部样式**。
 
-#### 何时使用 Tailwind CSS
+### 实践建议
 
-- ✅ 页面布局（flex、grid、spacing）
-- ✅ 响应式设计（md:、lg: 等断点）
-- ✅ 通用样式（颜色、字体、边框）
-- ✅ 快速原型和间距控制
-- ✅ 工具类样式（hover、focus 等状态）
+- 先使用 Naive UI 组件 props（`type`、`size`、`tertiary`、`striped` 等）
+- 再在组件外层容器使用 Tailwind 类控制布局与视觉
+- 只有在 props + Tailwind + 主题 token 都无法满足时，才新增少量 scoped CSS
 
-#### 何时使用 Less
+### 详细文档
 
-- ✅ Ant Design 组件样式覆盖
-- ✅ 复杂的组件样式定制
-- ✅ 主题变量修改
-- ✅ 深度选择器（:deep()）样式
-- ✅ 组件级别的样式封装
+完整说明请查看 [`docs/STYLE_GUIDE.md`](docs/STYLE_GUIDE.md)。
 
-### ⚠️ 重要：样式优先级问题
+## 更多配置
 
-当在 Ant Design 组件上直接使用 Tailwind 间距类时，由于 CSS 优先级问题，可能需要特殊处理：
-
-**方案 1：使用 `!` 修饰符（推荐用于简单场景）**
-
-```vue
-<a-card class="mb-6!" title="标题">内容</a-card>
-```
-
-**方案 2：外层包裹 div（推荐用于复杂布局）**
-
-```vue
-<div class="mb-6">
-  <a-card title="标题">内容</a-card>
-</div>
-```
-
-### 📋 样式位置选择：四个判断问题
-
-当需要自定义 Ant Design 组件样式时，使用以下四个问题来判断应该写在哪个位置：
-
-1. **是不是只影响当前页面？**
-2. **是否依赖页面结构或上下文？**
-3. **将来复用价值是否很低？**
-4. **用 Tailwind / token 是否做不到？**
-
-**全部是"是"** → 写在 **Vue 文件的 scoped less**（使用 `:deep()`）  
-**否则** → 写在 **全局 `antd-overrides.less`** 或使用 **ConfigProvider**
-
-### 📚 详细文档
-
-**完整样式指南：** 请查看 [`docs/STYLE_GUIDE.md`](docs/STYLE_GUIDE.md) 获取：
-
-- 样式优先级问题的详细分析
-- 三种解决方案的对比和选择指南
-- 样式位置选择的判断标准（四个问题）
-- 实际项目示例和最佳实践
-- Scoped Less vs 全局 Less 的对比表格
-
-## 📚 更多配置
+### 核心框架
 
 - [Vite 配置参考](https://vite.dev/config/)
 - [Vue 3 文档](https://vuejs.org/)
 - [TypeScript 文档](https://www.typescriptlang.org/)
 
-## 🤝 贡献指南
+### 主要依赖库
+
+- [Tailwind CSS 文档](https://tailwindcss.com/docs) — 实用优先的 CSS 框架
+- [Naive UI 文档](https://www.naiveui.com/zh-CN/os-theme) — Vue 3 组件库
+- [Material Symbols 图标库](https://fonts.google.com/icons) — Google Material 图标（Google Fonts）
+
+## 贡献指南
 
 1. Fork 本项目
 2. 创建特性分支 (`git checkout -b feat/amazing-feature`)
@@ -329,11 +318,11 @@ TypeScript 默认无法处理 `.vue` 文件的类型信息，因此我们使用 
 4. 推送到分支 (`git push origin feat/amazing-feature`)
 5. 开启 Pull Request
 
-## 📄 许可证
+## 许可证
 
 [MIT License](LICENSE)
 
-## 🙋 常见问题
+## 常见问题
 
 ### Q: 如何禁用 ESLint 某条规则？
 
@@ -347,4 +336,4 @@ rules: {
 
 ---
 
-**Happy Coding! 🎉**
+**Happy Coding!**

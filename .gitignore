@@ -34,3 +34,6 @@ coverage
 
 # Vitest
 __screenshots__/
+
+# auto import components
+components.d.ts

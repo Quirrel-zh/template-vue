@@ -1,17 +1,16 @@
-import Antd from 'ant-design-vue'
-
 import { createPinia } from 'pinia'
-
 import { createApp } from 'vue'
 import App from './App.vue'
+
+import i18n from './i18n'
 import router from './router'
+
+import './assets/fonts/fonts.css'
 import './assets/styles/tailwind.css'
-import './assets/styles/antd-overrides.less'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-app.use(Antd)
-
+app.use(i18n)
 app.mount('#app')

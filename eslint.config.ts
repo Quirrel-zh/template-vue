@@ -14,5 +14,5 @@ export default antfu({
 })
   .append(prettier)
   .append({
-    ignores: ['README.md'],
+    ignores: ['README.md', '.cursor/**'],
   })

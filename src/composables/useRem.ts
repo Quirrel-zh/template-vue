@@ -32,20 +32,20 @@ function setRem(): number {
 
 /**
  * 在根组件中调用，动态设置 html 根字号实现 rem 等比缩放。
- * 返回当前根字号（px），可用于同步 Ant Design ConfigProvider 的 fontSize token。
+ * 返回当前根字号（px），可用于同步 Naive UI NConfigProvider 的 fontSize 配置。
  */
 export function useRem() {
-  const antFontSize = ref(BASE_FONT_SIZE)
+  const uiFontSize = ref(BASE_FONT_SIZE)
 
   function onResize() {
-    antFontSize.value = setRem()
+    uiFontSize.value = setRem()
   }
 
   const debouncedResize = debounce(onResize, 100)
 
   onMounted(() => {
     // 立即执行一次，无需等待 debounce
-    antFontSize.value = setRem()
+    uiFontSize.value = setRem()
     window.addEventListener('resize', debouncedResize)
   })
 
@@ -53,5 +53,5 @@ export function useRem() {
     window.removeEventListener('resize', debouncedResize)
   })
 
-  return { antFontSize }
+  return { uiFontSize }
 }

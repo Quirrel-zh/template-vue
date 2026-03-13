@@ -8,29 +8,50 @@
  *   16px → 1rem | 24px → 1.5rem | 32px → 2rem | 12px → 0.75rem | 8px → 0.5rem
  */
 
-@layer reset;
-
-@layer reset {
-  @import 'ant-design-vue/dist/reset.css';
-}
 @import 'tailwindcss';
 
 @theme {
+  --font-sans: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+}
+
+html,
+body,
+#app {
+  font-family: var(--font-sans);
+}
+
+/**
+* 主题颜色
+* Naive UI 主题请在 src/theme/naiveTheme.ts 中保持一致
+*/
+@theme {
   /* color */
-  --color-primary: #0e8c11;
-  --color-primary-dark: #1c751e;
-  --color-primary-light: #9cff9e;
-  --color-default: #0a1428;
-  --color-default-dark: #222f35;
-  --color-remark: #6a6d78;
+  --color-primary: #09a4ff;
+  --color-primary-hover: #008fe5;
+
+  --color-success: #4cd97b;
+  --color-success-hover: #3bc76a;
+
+  --color-warning: #ffd14c;
+  --color-warning-hover: #fcc138;
+
+  --color-error: #ff3b08;
+  --color-error-hover: #e03a3a;
 
   /* margin/padding */
-  --margin-default: 16.25rem;
-  --padding-default: 16.25rem;
 
   /* font-size */
-  --text-title-lg: 3.5rem;
-  --text-title-md: 2.87rem;
+  /* 标题 */
+  --text-title-xl: 2rem; /* 32px */
+  --text-title-lg: 1.25rem; /* 20px */
+  --text-title-md: 1.124rem; /* 18px */
+
+  /* text-color */
+  --text-color-title: #1d1d1d;
+  --text-color-body: #77859a;
+  --text-color-caption: #a1acb5;
+  --text-color-disable: #c6c6c6;
+  --text-color-link: #09a4ff;
 
   /* hover */
 }
