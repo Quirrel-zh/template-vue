@@ -20,22 +20,25 @@ if [[ -z "$project_dir" ]]; then
   exit 0
 fi
 
-mapfile -t files < <(sort -u "$tracking_file")
+deduped=$(sort -u "$tracking_file")
+tmp_list="/tmp/cursor-format-list-${conv_id}.txt"
+: > "$tmp_list"
 
-existing_files=()
-for f in "${files[@]}"; do
-  [[ -f "$f" ]] && existing_files+=("$f")
+echo "$deduped" | while IFS= read -r f; do
+  [[ -f "$f" ]] && echo "$f" >> "$tmp_list"
 done
 
-if [[ ${#existing_files[@]} -eq 0 ]]; then
-  rm -f "$tracking_file"
+if [[ ! -s "$tmp_list" ]]; then
+  rm -f "$tracking_file" "$tmp_list"
   exit 0
 fi
 
 cd "$project_dir" || exit 0
 
-pnpm exec prettier --write "${existing_files[@]}" 2>/dev/null
-pnpm exec eslint --fix "${existing_files[@]}" 2>/dev/null
+xargs pnpm exec prettier --write < "$tmp_list" 2>/dev/null
+xargs pnpm exec eslint --fix < "$tmp_list" 2>/dev/null
+
+rm -f "$tmp_list"
 
 rm -f "$tracking_file"
 
