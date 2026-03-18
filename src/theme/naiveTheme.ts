@@ -8,6 +8,7 @@ export const naiveThemeOverrides: GlobalThemeOverrides = {
     fontFamily: "'Inter', 'Noto Sans SC', system-ui, sans-serif",
     fontSize: '16px',
     fontWeight: '400',
+    borderRadius: '8px',
 
     /* 主色 - 对应 --color-primary */
     primaryColor: '#09a4ff',

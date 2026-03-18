@@ -20,17 +20,20 @@
 </script>
 
 <template>
-  <n-config-provider
-    :locale="naiveLocale.locale"
-    :date-locale="naiveLocale.dateLocale"
-    :theme-overrides="naiveThemeOverrides"
-  >
-    <n-spin :show="loading" description="Loading...">
-      <div class="main_container flex flex-col h-screen bg-white">
-        <router-view />
-      </div>
-    </n-spin>
-  </n-config-provider>
+  <n-message-provider>
+    <n-config-provider
+      :locale="naiveLocale.locale"
+      :date-locale="naiveLocale.dateLocale"
+      :theme-overrides="naiveThemeOverrides"
+    >
+      <n-spin :show="loading" description="Loading...">
+        <div class="main_container flex flex-col h-screen bg-white">
+          <router-view />
+        </div>
+      </n-spin>
+      <n-global-style />
+    </n-config-provider>
+  </n-message-provider>
 </template>
 
 <style scoped></style>

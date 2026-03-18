@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "z-mcp-yapi": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "z-mcp-yapi",
+        "--stdio",
+        "--yapi-base-url=your_yapi_url",
+        "--yapi-token=your_yapi_token",
+        "--yapi-project-id=your_yapi_project_id"
+      ]
+    }
+  }
+}

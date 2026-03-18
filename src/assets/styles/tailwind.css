@@ -14,12 +14,6 @@
   --font-sans: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
 }
 
-html,
-body,
-#app {
-  font-family: var(--font-sans);
-}
-
 /**
 * 主题颜色
 * Naive UI 主题请在 src/theme/naiveTheme.ts 中保持一致
@@ -54,4 +48,10 @@ body,
   --text-color-link: #09a4ff;
 
   /* hover */
+}
+
+@layer components {
+  .ui-layout {
+    @apply p-4 bg-[url('@/assets/images/layout/bg.png')] bg-cover bg-center transition-colors;
+  }
 }

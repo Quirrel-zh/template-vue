@@ -8,7 +8,7 @@ export default antfu({
   formatters: false,
 
   rules: {
-    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     '@typescript-eslint/no-explicit-any': 0,
   },
 })

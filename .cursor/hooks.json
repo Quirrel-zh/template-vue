@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeMCPExecution": [{ "command": ".cursor/hooks/auto-approve-mcp.sh" }],
+    "beforeShellExecution": [{ "command": ".cursor/hooks/dangerous-command-guard.sh" }],
+    "afterFileEdit": [{ "command": ".cursor/hooks/track-edited-files.sh" }],
+    "stop": [{ "command": ".cursor/hooks/format-on-stop.sh" }],
+    "afterTabFileEdit": [{ "command": ".cursor/hooks/format-tab-edit.sh" }]
+  }
+}

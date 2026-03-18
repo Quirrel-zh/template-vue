@@ -37,6 +37,7 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 5173,
       host: '0.0.0.0',
+      open: true,
       proxy: {
         '/api': {
           target: proxyTarget,
@@ -47,12 +48,16 @@ export default defineConfig(({ mode }) => {
             // 打印请求信息
             proxy.on('proxyReq', (proxyReq, req, _res) => {
               if (options.target && req.url) {
+                // eslint-disable-next-line no-console -- console is used for debugging
                 console.info('Proxying request to:', options.target + req.url)
               }
             })
           },
         },
       },
+    },
+    esbuild: {
+      drop: mode === 'production' ? ['console', 'debugger'] : [],
     },
   }
 })

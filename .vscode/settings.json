@@ -1,0 +1,24 @@
+{
+  // 将tailwindcss入口文件关联到tailwindcss语言服务
+  "files.associations": {
+    "_main.css": "tailwindcss",
+    "**/tailwind.css": "tailwindcss"
+  },
+  // 格式化代码
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  // i18n-ally配置
+  "i18n-ally.localesPaths": ["src/locales"],
+  "i18n-ally.sourceLanguage": "en-US",
+  "i18n-ally.enabledParsers": ["json", "yaml", "ts"],
+  "i18n-ally.annotations": true,
+  "i18n-ally.extract.keygenStyle": "camelCase",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.enabledFrameworks": ["vue"],
+  "i18n-ally.translate.engines": ["google"],
+  "i18n-ally.readonly": false
+}

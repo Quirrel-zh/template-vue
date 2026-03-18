@@ -18,7 +18,7 @@
 
 <template>
   <n-dropdown
-    trigger="click"
+    trigger="hover"
     placement="bottom-end"
     :options="menuOptions"
     :value="currentLocale"
